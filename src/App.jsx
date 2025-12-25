@@ -13,47 +13,91 @@ import voluntaryAward from '/images/Honoring-Me-For-3rd Place – National Volun
 import hackathonWinning from '/images/Me-Winning-University-Of-Mosul_Hackathon-Second-Place.jpg';
 import facilitating from '/images/Me-Facilititing-Conversitoinal_Club.jpg';
 
+// Animated Background
+function AnimatedBackground() {
+  return (
+    <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-amber-200/20 rounded-full blur-3xl animate-pulse" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-orange-200/20 rounded-full blur-3xl animate-pulse delay-700" />
+      <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-yellow-200/20 rounded-full blur-3xl animate-pulse delay-1000" />
+    </div>
+  );
+}
+
 // Hero Section
 function Hero({ onScrollProgress }) {
   const [ref, inView] = useInView(0.1);
-  const quoteScale = Math.max(0.6, 1 - onScrollProgress * 0.8);
-  const quoteOpacity = Math.max(0, 1 - onScrollProgress * 2);
+  const quoteScale = Math.max(0.8, 1 - onScrollProgress * 0.5);
+  const quoteOpacity = Math.max(0, 1 - onScrollProgress * 1.5);
 
   return (
-    <section ref={ref} className="relative h-screen w-full overflow-hidden flex items-center justify-center film-grain">
-      <div
-        className="absolute inset-0 w-full h-full object-cover"
-        style={{
-          transform: `scale(${1 + onScrollProgress * 0.3})`,
-          opacity: 1 - onScrollProgress * 0.7,
-        }}
-      >
-        <img
-          src={homepageMe}
-          alt="Abdulrahman Majid"
-          className="w-full h-full object-cover object-center"
-        />
+    <section ref={ref} className="relative min-h-screen w-full overflow-hidden flex items-center justify-center bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 opacity-50">
+        <div className="absolute top-20 left-20 w-72 h-72 bg-amber-300/30 rounded-full filter blur-[128px] animate-pulse" />
+        <div className="absolute bottom-20 right-20 w-72 h-72 bg-orange-300/30 rounded-full filter blur-[128px] animate-pulse delay-1000" />
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/30" />
-
-      <div
-        className="relative z-10 text-center px-6"
-        style={{
-          transform: `scale(${quoteScale})`,
-          opacity: quoteOpacity,
-        }}
-      >
-        <p className="font-display text-4xl md:text-6xl lg:text-7xl text-white font-medium leading-tight tracking-tight">
-          "I create change, therefore I am."
-        </p>
+      {/* Floating particles */}
+      <div className="absolute inset-0">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-amber-800/20 rounded-full animate-pulse"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 2}s`,
+              animationDuration: `${2 + Math.random() * 2}s`,
+            }}
+          />
+        ))}
       </div>
 
+      {/* Content */}
+      <div className="relative z-10 flex flex-col items-center px-6">
+        {/* Smaller contained image */}
+        <div
+          className="relative mb-12 rounded-2xl overflow-hidden shadow-2xl shadow-amber-900/10"
+          style={{
+            transform: `scale(${quoteScale})`,
+            opacity: quoteOpacity,
+            maxWidth: '500px',
+            width: '90%',
+          }}
+        >
+          <img
+            src={homepageMe}
+            alt="Abdulrahman Majid"
+            className="w-full h-auto object-cover"
+          />
+          {/* Image overlay gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-amber-900/10 to-transparent" />
+        </div>
+
+        {/* Quote */}
+        <div
+          className="text-center max-w-3xl"
+          style={{
+            transform: `scale(${quoteScale})`,
+            opacity: quoteOpacity,
+          }}
+        >
+          <p className="font-display text-4xl md:text-6xl lg:text-7xl text-amber-950 font-medium leading-tight tracking-tight">
+            "I create change, therefore I am."
+          </p>
+        </div>
+      </div>
+
+      {/* Scroll indicator */}
       <div
         className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         style={{ opacity: 1 - onScrollProgress * 3 }}
       >
-        <div className="w-px h-16 bg-white/40 animate-pulse" />
+        <div className="w-6 h-10 border-2 border-amber-800/20 rounded-full flex justify-center pt-2">
+          <div className="w-1 h-3 bg-amber-800/40 rounded-full animate-bounce" />
+        </div>
+        <p className="text-amber-800/50 text-sm">Scroll to explore</p>
       </div>
     </section>
   );
@@ -65,11 +109,16 @@ function IdentityReveal() {
   const [nameRef, nameInView] = useInView(0.5);
 
   return (
-    <section ref={ref} className="relative min-h-[70vh] flex items-center justify-center bg-off-white">
+    <section ref={ref} className="relative min-h-[80vh] flex items-center justify-center bg-gradient-to-b from-amber-50 to-orange-50">
       <div className="max-w-5xl mx-auto px-6 text-center">
+        <div className="mb-8 inline-flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur border border-amber-200/50 rounded-full">
+          <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+          <span className="text-amber-800/70 text-sm">Available for opportunities</span>
+        </div>
+
         <h1
           ref={nameRef}
-          className={`font-display text-5xl md:text-7xl lg:text-8xl font-semibold text-accent tracking-tight transition-all duration-1000 ${
+          className={`font-display text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-amber-900 via-orange-900 to-amber-950 bg-clip-text text-transparent tracking-tight transition-all duration-1000 ${
             nameInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
           }`}
         >
@@ -77,14 +126,41 @@ function IdentityReveal() {
         </h1>
 
         <div
-          className={`mt-8 flex flex-wrap justify-center gap-4 md:gap-6 text-sm md:text-base text-gray-600 font-light tracking-wide transition-all duration-1000 delay-300 ${
+          className={`mt-10 flex flex-wrap justify-center gap-4 text-sm text-amber-800/80 font-medium transition-all duration-1000 delay-300 ${
             nameInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <span className="px-4 py-2 border border-gray-200 rounded-full">Cybersecurity Student</span>
-          <span className="px-4 py-2 border border-gray-200 rounded-full">Ethical Hacker</span>
-          <span className="px-4 py-2 border border-gray-200 rounded-full">Builder</span>
-          <span className="px-4 py-2 border border-gray-200 rounded-full">Community Founder</span>
+          {[
+            { text: 'Cybersecurity Student' },
+            { text: 'Ethical Hacker' },
+            { text: 'Builder' },
+            { text: 'Community Founder' },
+          ].map((role, i) => (
+            <div
+              key={i}
+              className="group px-6 py-3 bg-white/60 backdrop-blur border border-amber-200/50 rounded-full hover:bg-white/80 hover:border-amber-400/50 transition-all duration-300 cursor-default"
+            >
+              <span>{role.text}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* Stats preview */}
+        <div
+          className={`mt-16 grid grid-cols-3 gap-8 max-w-2xl mx-auto transition-all duration-1000 delay-500 ${
+            nameInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          {[
+            { value: '4th', label: 'National CTF' },
+            { value: '100+', label: 'Students' },
+            { value: '2', label: 'Certifications' },
+          ].map((stat, i) => (
+            <div key={i} className="text-center">
+              <p className="text-3xl md:text-4xl font-bold text-amber-950">{stat.value}</p>
+              <p className="text-amber-700/60 text-sm mt-1">{stat.label}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -106,19 +182,27 @@ function Philosophy() {
   ];
 
   return (
-    <section className="py-32 md:py-48 bg-soft-gray">
+    <section className="py-32 bg-amber-50 relative">
       <div className="max-w-4xl mx-auto px-6">
+        <div className="text-center mb-20">
+          <p className="text-amber-600 font-medium mb-4">MY APPROACH</p>
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-amber-950">Philosophy</h2>
+        </div>
+
         {thoughts.map((thought, index) => (
           <div
             key={index}
             ref={thought.ref}
-            className={`mb-16 md:mb-24 transition-all duration-1000 ${thought.delay} ${
-              thought.inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            className={`mb-16 group transition-all duration-1000 ${thought.delay} ${
+              thought.inView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
             }`}
           >
-            <p className="font-display text-2xl md:text-4xl text-accent leading-relaxed">
-              {thought.text}
-            </p>
+            <div className="flex items-start gap-6">
+              <div className="w-2 h-2 bg-amber-400 rounded-full mt-8 flex-shrink-0"></div>
+              <p className="font-display text-2xl md:text-4xl text-amber-950 leading-relaxed">
+                {thought.text}
+              </p>
+            </div>
           </div>
         ))}
       </div>
@@ -132,20 +216,32 @@ function NationalCTF() {
   const [statsRef, statsInView] = useInView(0.4);
 
   return (
-    <section ref={ref} className="relative py-32 bg-black text-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
+    <section ref={ref} className="relative py-32 bg-gradient-to-br from-amber-100 via-orange-50 to-amber-50 text-amber-950 overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-amber-300/20 rounded-full filter blur-[128px]" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-orange-300/20 rounded-full filter blur-[128px]" />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div
             className={`transition-all duration-1200 delay-200 ${
               inView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
             }`}
           >
-            <p className="text-gray-400 text-sm uppercase tracking-widest mb-4">Achievement</p>
-            <h2 className="font-display text-4xl md:text-6xl font-semibold mb-6 leading-tight">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur rounded-full mb-6 border border-amber-200/50">
+              <svg className="w-5 h-5 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+              <span className="text-sm font-medium">CAREER HIGHLIGHT</span>
+            </div>
+
+            <h2 className="font-display text-5xl md:text-7xl font-bold mb-6 leading-tight">
               4th Place<br />
-              <span className="text-gray-500">National Cybersecurity CTF</span>
+              <span className="text-amber-700">National Cybersecurity CTF</span>
             </h2>
-            <p className="text-gray-400 text-xl mb-8">Ministry of Interior — 2025</p>
+            <p className="text-amber-800/60 text-xl mb-10">Ministry of Interior — 2025</p>
 
             <div
               ref={statsRef}
@@ -153,19 +249,19 @@ function NationalCTF() {
                 statsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
             >
-              <div className="flex items-center gap-6">
-                <span className="text-5xl md:text-6xl font-display font-semibold">580</span>
-                <span className="text-gray-400 text-lg">competitors</span>
+              <div className="flex items-center gap-6 group">
+                <span className="text-5xl md:text-6xl font-display font-bold text-amber-950 group-hover:text-amber-700 transition-colors">580</span>
+                <span className="text-amber-800/60 text-lg">competitors</span>
               </div>
-              <div className="w-16 h-px bg-gray-700" />
-              <div className="flex items-center gap-6">
-                <span className="text-5xl md:text-6xl font-display font-semibold">80</span>
-                <span className="text-gray-400 text-lg">finalists</span>
+              <div className="w-full h-px bg-gradient-to-r from-amber-400/50 to-transparent" />
+              <div className="flex items-center gap-6 group">
+                <span className="text-5xl md:text-6xl font-display font-bold text-amber-950 group-hover:text-amber-700 transition-colors">80</span>
+                <span className="text-amber-800/60 text-lg">finalists</span>
               </div>
-              <div className="w-16 h-px bg-gray-700" />
-              <div className="flex items-center gap-6">
-                <span className="text-5xl md:text-6xl font-display font-semibold text-white">4</span>
-                <span className="text-white text-lg font-medium">nationally</span>
+              <div className="w-full h-px bg-gradient-to-r from-amber-400/50 to-transparent" />
+              <div className="flex items-center gap-6 group">
+                <span className="text-5xl md:text-6xl font-display font-bold text-amber-600">4</span>
+                <span className="text-amber-950 text-lg font-medium">nationally ranked</span>
               </div>
             </div>
           </div>
@@ -175,12 +271,15 @@ function NationalCTF() {
               inView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
             }`}
           >
-            <div className="relative overflow-hidden rounded-lg">
-              <img
-                src={nationalCTF}
-                alt="National Cybersecurity CTF"
-                className="w-full h-auto hover:scale-105 transition-transform duration-700"
-              />
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-orange-400 rounded-2xl blur-2xl opacity-20" />
+              <div className="relative overflow-hidden rounded-2xl border border-amber-200/50 shadow-xl">
+                <img
+                  src={nationalCTF}
+                  alt="National Cybersecurity CTF"
+                  className="w-full h-auto hover:scale-105 transition-transform duration-700"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -194,19 +293,24 @@ function AchievementMoment({ image, title, subtitle, description, reverse = fals
   const [ref, inView] = useInView(0.3);
 
   return (
-    <section ref={ref} className="py-24 md:py-32 bg-off-white">
+    <section ref={ref} className="py-24 bg-orange-50">
       <div className="max-w-6xl mx-auto px-6">
         <div className={`grid md:grid-cols-2 gap-8 md:gap-16 items-center ${reverse ? 'md:grid-flow-col-dense' : ''}`}>
           <div
-            className={`relative overflow-hidden rounded-lg transition-all duration-1000 ${
+            className={`relative transition-all duration-1000 ${
               inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
             } ${reverse ? 'md:col-start-2' : ''}`}
           >
-            <img
-              src={image}
-              alt={title}
-              className="w-full h-auto hover:scale-105 transition-transform duration-700"
-            />
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-orange-400 rounded-2xl blur-xl opacity-20" />
+              <div className="relative overflow-hidden rounded-2xl border border-amber-200/50 shadow-lg">
+                <img
+                  src={image}
+                  alt={title}
+                  className="w-full h-auto hover:scale-105 transition-transform duration-700"
+                />
+              </div>
+            </div>
           </div>
 
           <div
@@ -214,10 +318,12 @@ function AchievementMoment({ image, title, subtitle, description, reverse = fals
               inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
             } ${reverse ? 'md:col-start-1' : ''}`}
           >
-            <p className="text-gray-400 text-sm uppercase tracking-widest mb-2">Achievement</p>
-            <h3 className="font-display text-3xl md:text-4xl font-semibold text-accent mb-2">{title}</h3>
-            <p className="text-gray-500 text-lg mb-4">{subtitle}</p>
-            <p className="text-gray-600 leading-relaxed">{description}</p>
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-100 rounded-full text-amber-700 text-sm mb-4">
+              <span>ACHIEVEMENT</span>
+            </div>
+            <h3 className="font-display text-3xl md:text-4xl font-bold text-amber-950 mb-2">{title}</h3>
+            <p className="text-amber-700 text-lg mb-4">{subtitle}</p>
+            <p className="text-amber-800/60 leading-relaxed">{description}</p>
           </div>
         </div>
       </div>
@@ -268,25 +374,35 @@ function CyberKhana() {
   const [contentRef, contentInView] = useInView(0.3);
 
   return (
-    <section ref={ref} className="py-32 bg-gradient-to-b from-soft-gray to-off-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <section ref={ref} className="py-32 bg-gradient-to-b from-amber-50 to-orange-50 relative">
+      <div className="absolute inset-0">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-orange-200/20 rounded-full filter blur-[128px]" />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-6">
         <div
           ref={contentRef}
           className={`text-center mb-16 transition-all duration-1000 ${
             contentInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
           }`}
         >
-          <p className="text-gray-400 text-sm uppercase tracking-widest mb-4">Founded & Led</p>
-          <h2 className="font-display text-4xl md:text-6xl lg:text-7xl font-semibold text-accent mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur rounded-full mb-6 border border-amber-200/50">
+            <svg className="w-5 h-5 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+            </svg>
+            <span className="text-sm font-medium text-amber-800/70">FOUNDED & LED</span>
+          </div>
+
+          <h2 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-amber-950 mb-6">
             Cyber Khana Student Club
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-amber-800/60 max-w-2xl mx-auto">
             Building the next generation of cybersecurity professionals through hands-on experience.
           </p>
         </div>
 
         {/* Stats */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
+        <div className="grid md:grid-cols-3 gap-6 mb-16">
           {[
             { value: "100+", label: "Students Impacted" },
             { value: "Custom", label: "CTF Platform" },
@@ -294,40 +410,41 @@ function CyberKhana() {
           ].map((stat, index) => (
             <div
               key={index}
-              className={`text-center p-8 bg-white rounded-lg transition-all duration-700 delay-${index * 200} ${
+              className={`group text-center p-8 bg-white/60 backdrop-blur border border-amber-200/50 rounded-2xl hover:bg-white/80 hover:border-amber-400/30 transition-all duration-500 ${
                 contentInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
+              style={{ transitionDelay: `${index * 150}ms` }}
             >
-              <p className="font-display text-3xl md:text-4xl font-semibold text-accent mb-2">{stat.value}</p>
-              <p className="text-gray-500">{stat.label}</p>
+              <p className="font-display text-3xl md:text-4xl font-bold text-amber-950 mb-2 group-hover:text-amber-700 transition-colors">{stat.value}</p>
+              <p className="text-amber-700/60">{stat.label}</p>
             </div>
           ))}
         </div>
 
         {/* Images Grid - Asymmetrical */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div className="md:col-span-2 md:row-span-2 overflow-hidden rounded-lg">
+          <div className="md:col-span-2 md:row-span-2 overflow-hidden rounded-2xl">
             <img
               src={cyberkhanaAudience}
               alt="CyberKhana Audience"
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
             />
           </div>
-          <div className="overflow-hidden rounded-lg">
+          <div className="overflow-hidden rounded-2xl">
             <img
               src={cyberkhanaPitching}
               alt="CyberKhana Pitching"
               className="w-full h-64 object-cover hover:scale-105 transition-transform duration-700"
             />
           </div>
-          <div className="overflow-hidden rounded-lg">
+          <div className="overflow-hidden rounded-2xl">
             <img
               src={cyberkhanaPitching2}
               alt="CyberKhana Pitching 2"
               className="w-full h-64 object-cover hover:scale-105 transition-transform duration-700"
             />
           </div>
-          <div className="md:col-span-3 overflow-hidden rounded-lg">
+          <div className="md:col-span-3 overflow-hidden rounded-2xl">
             <img
               src={cyberkhanaPlayers}
               alt="CyberKhana Players"
@@ -342,7 +459,7 @@ function CyberKhana() {
             href="https://www.cyberkhana.tech/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-white rounded-full hover:bg-gray-800 transition-colors"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-full hover:shadow-lg hover:shadow-amber-500/25 transition-all duration-300"
           >
             <span>Visit Platform</span>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -353,7 +470,7 @@ function CyberKhana() {
             href="https://www.facebook.com/ccsmuom/posts/pfbid02uoPdEdCcp3zcmBEzcZAevpJRa3f8bVtQQLdKncHAM8FSfceU2sa32LQt5XJTm4NVl"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-4 border-2 border-accent text-accent rounded-full hover:bg-accent hover:text-white transition-colors"
+            className="inline-flex items-center gap-2 px-8 py-4 border-2 border-amber-300/50 text-amber-900 rounded-full hover:bg-amber-100 transition-all duration-300"
           >
             <span>See Announcement</span>
           </a>
@@ -367,52 +484,45 @@ function CyberKhana() {
 function Projects() {
   const [ref, inView] = useInView(0.2);
 
-  const projects = [
-    {
-      name: "NullOS",
-      description: "An immersive cybersecurity educational game that simulates real-world scenarios.",
-      highlight: "Educational Game",
-    },
-    {
-      name: "R4TCH3T",
-      description: "An automated web penetration testing tool designed for efficiency and comprehensive analysis.",
-      highlight: "Pentesting Tool",
-    },
-  ];
+  const project = {
+    name: "NullOS",
+    description: "An immersive cybersecurity educational game that simulates real-world scenarios.",
+    highlight: "Educational Game",
+  };
 
   return (
-    <section ref={ref} className="py-32 bg-off-white">
+    <section ref={ref} className="py-32 bg-amber-50">
       <div className="max-w-4xl mx-auto px-6">
         <div
           className={`text-center mb-20 transition-all duration-1000 ${
             inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
           }`}
         >
-          <p className="text-gray-400 text-sm uppercase tracking-widest mb-4">Built</p>
-          <h2 className="font-display text-4xl md:text-5xl font-semibold text-accent">Projects</h2>
+          <p className="text-amber-600 font-medium mb-4">CREATED</p>
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-amber-950">Project</h2>
         </div>
 
-        <div className="space-y-16">
-          {projects.map((project, index) => (
-            <div
-              key={index}
-              className={`group transition-all duration-1000 delay-${index * 200} ${
-                inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-              }`}
-            >
-              <div className="border-b border-gray-200 pb-8 group-hover:border-accent/30 transition-colors">
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                  <div>
-                    <p className="text-gray-400 text-sm uppercase tracking-widest mb-2">{project.highlight}</p>
-                    <h3 className="font-display text-3xl md:text-4xl font-semibold text-accent mb-4">
-                      {project.name}
-                    </h3>
-                    <p className="text-gray-600 text-lg leading-relaxed max-w-xl">{project.description}</p>
-                  </div>
-                </div>
+        <div
+          className={`transition-all duration-700 ${
+            inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+          }`}
+        >
+          <div className="p-8 bg-white/60 backdrop-blur border border-amber-200/50 rounded-2xl hover:bg-white/80 hover:border-amber-400/30 transition-all duration-300">
+            <div className="flex items-start gap-6">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-orange-400 flex items-center justify-center flex-shrink-0">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div className="flex-1">
+                <p className="text-amber-600 text-sm uppercase tracking-widest mb-2">{project.highlight}</p>
+                <h3 className="font-display text-2xl md:text-3xl font-bold text-amber-950 mb-3">
+                  {project.name}
+                </h3>
+                <p className="text-amber-800/60 leading-relaxed">{project.description}</p>
               </div>
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </section>
@@ -435,15 +545,15 @@ function Certifications() {
   ];
 
   return (
-    <section ref={ref} className="py-32 bg-soft-gray">
+    <section ref={ref} className="py-32 bg-gradient-to-b from-amber-50 to-orange-50">
       <div className="max-w-4xl mx-auto px-6">
         <div
           className={`text-center mb-16 transition-all duration-1000 ${
             inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
           }`}
         >
-          <p className="text-gray-400 text-sm uppercase tracking-widest mb-4">Verified</p>
-          <h2 className="font-display text-4xl md:text-5xl font-semibold text-accent">Certifications</h2>
+          <p className="text-amber-600 font-medium mb-4">VERIFIED CREDENTIALS</p>
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-amber-950">Certifications</h2>
         </div>
 
         <div className="space-y-6">
@@ -453,18 +563,28 @@ function Certifications() {
               href={cert.url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`block group transition-all duration-700 delay-${index * 200} ${
+              className={`block group transition-all duration-700 ${
                 inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
+              style={{ transitionDelay: `${index * 150}ms` }}
             >
-              <div className="bg-white p-8 md:p-10 rounded-lg group-hover:bg-accent group-hover:text-white transition-all duration-300">
+              <div className="p-8 bg-white/60 backdrop-blur border border-amber-200/50 rounded-2xl group-hover:bg-white/80 group-hover:border-amber-400/30 transition-all duration-300">
                 <div className="flex items-start justify-between gap-4">
-                  <h3 className="font-display text-xl md:text-2xl font-medium">{cert.name}</h3>
-                  <svg className="w-5 h-5 opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-400 to-orange-400 flex items-center justify-center flex-shrink-0">
+                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                      </svg>
+                    </div>
+                    <h3 className="font-display text-xl md:text-2xl font-bold text-amber-950">{cert.name}</h3>
+                  </div>
+                  <div className="flex items-center gap-2 text-amber-600">
+                    <span className="text-sm">Verify</span>
+                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </div>
                 </div>
-                <p className="text-sm opacity-50 mt-2 group-hover:text-white/70">Click to verify</p>
               </div>
             </a>
           ))}
@@ -486,15 +606,20 @@ function Contact() {
   ];
 
   return (
-    <section ref={ref} className="min-h-screen py-32 bg-off-white flex items-center">
-      <div className="max-w-4xl mx-auto px-6 w-full">
+    <section ref={ref} className="min-h-screen py-32 bg-gradient-to-b from-orange-50 to-amber-100 flex items-center relative">
+      <div className="absolute inset-0">
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-amber-300/20 rounded-full filter blur-[128px]" />
+      </div>
+
+      <div className="max-w-4xl mx-auto px-6 w-full relative z-10">
         <div
           className={`text-center mb-20 transition-all duration-1000 ${
             inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
           }`}
         >
-          <h2 className="font-display text-4xl md:text-5xl font-semibold text-accent mb-4">Let's connect</h2>
-          <p className="text-gray-500 text-lg">Open to opportunities and collaborations.</p>
+          <p className="text-amber-600 font-medium mb-4">GET IN TOUCH</p>
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-amber-950 mb-4">Let's Connect</h2>
+          <p className="text-amber-800/60 text-lg">Open to opportunities and collaborations.</p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-4">
@@ -502,12 +627,22 @@ function Contact() {
             <a
               key={index}
               href={contact.link}
-              className={`group block p-8 bg-white rounded-lg hover:bg-accent hover:text-white transition-all duration-300 delay-${index * 100} ${
+              className={`group block p-6 bg-white/60 backdrop-blur border border-amber-200/50 rounded-2xl hover:bg-white/80 hover:border-amber-400/30 transition-all duration-300 ${
                 inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
+              style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <p className="text-sm opacity-50 mb-2 group-hover:text-white/70">{contact.label}</p>
-              <p className="font-display text-lg md:text-xl">{contact.value}</p>
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-400 to-orange-400 flex items-center justify-center flex-shrink-0">
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-amber-700/60 text-sm mb-1">{contact.label}</p>
+                  <p className="font-display text-lg text-amber-950">{contact.value}</p>
+                </div>
+              </div>
             </a>
           ))}
         </div>
@@ -515,7 +650,14 @@ function Contact() {
         <div className={`mt-24 text-center transition-all duration-1000 delay-500 ${
           inView ? 'opacity-100' : 'opacity-0'
         }`}>
-          <p className="text-gray-400 font-display text-2xl italic">"I create change, therefore I am."</p>
+          <div className="inline-block p-8 bg-white/60 backdrop-blur border border-amber-200/50 rounded-3xl">
+            <p className="text-amber-800/70 font-display text-2xl italic">"I create change, therefore I am."</p>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="mt-20 text-center text-amber-700/40 text-sm">
+          <p>© 2025 Abdulrahman Majid Adnan. Built with passion.</p>
         </div>
       </div>
     </section>
@@ -527,9 +669,9 @@ function ScrollProgress() {
   const progress = useScrollProgress();
 
   return (
-    <div className="fixed top-0 left-0 right-0 h-1 bg-gray-100 z-50">
+    <div className="fixed top-0 left-0 right-0 h-1 bg-amber-200/50 z-50">
       <div
-        className="h-full bg-accent transition-all duration-150 ease-out"
+        className="h-full bg-gradient-to-r from-amber-500 to-orange-500 transition-all duration-150 ease-out"
         style={{ width: `${progress * 100}%` }}
       />
     </div>
@@ -541,7 +683,8 @@ function App() {
   const scrollProgress = useScrollProgress();
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-amber-50">
+      <AnimatedBackground />
       <ScrollProgress />
       <Hero onScrollProgress={scrollProgress} />
       <IdentityReveal />
